@@ -1,41 +1,43 @@
+import org.junit.Before;
 import org.junit.Test;
-
 import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 public class StudentTest {
+    private Student global;
+
+    @Before
+    public void createStudent() {
+        this.global = new Student(1L, "fer");
+    }
+
     @Test
     public void testCreateStudent(){
-        Student fer = new Student(1L, "fer");
         Student ryan = null;
         assertNull(ryan);
-        assertNotNull(fer);
+        assertNotNull(this.global);
     }
 
     @Test
     public void testStudentFields(){
-        Student fer = new Student(1L, "fer");
-        assertSame(1L, fer.getId());
-        assertSame("fer", fer.getName());
-        assertSame(0, fer.getGrades().size());
+        assertSame(1L, this.global.getId());
+        assertSame("fer", this.global.getName());
+        assertSame(0, this.global.getGrades().size());
     }
 
 
     @Test
     public void testAddGrade(){
-        Student fer = new Student(1L, "fer");
-        fer.addGrade(100);
-        assertSame(100, fer.getGrades().get(0));
-        fer.addGrade(80);
-        assertSame(80, fer.getGrades().get(1));
+        this.global.addGrade(100);
+        assertSame(100, this.global.getGrades().get(0));
+        this.global.addGrade(80);
+        assertSame(80, this.global.getGrades().get(1));
     }
 
     @Test
     public void testAverageGrade(){
-        Student fer = new Student(1L, "fer");
-        fer.addGrade(100);
-        fer.addGrade(80);
-        assertEquals(90, fer.getGradeAverage(), 0);
+        this.global.addGrade(100);
+        this.global.addGrade(80);
+        assertEquals(90, this.global.getGradeAverage(), 0);
     }
 }
